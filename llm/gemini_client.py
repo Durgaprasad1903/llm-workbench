@@ -23,3 +23,12 @@ class GeminiClient:
         )
 
         return response.text
+    def stream(self, prompt: str):
+        response = self.client.models.generate_content_stream(
+            model=self.model,
+            contents=prompt
+        )
+
+        for chunk in response:
+            if chunk.text:
+                yield chunk.text

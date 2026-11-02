@@ -23,3 +23,13 @@ class OpenAIClient:
         )
 
         return response.output_text
+    def stream(self, prompt: str):
+        response = self.client.responses.create(
+            model=self.model,
+            input=prompt,
+            stream=True
+        )
+
+        for event in response:
+            if event.type == "response.output_text.delta":
+                yield event.delta    

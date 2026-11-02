@@ -1,8 +1,10 @@
 import pytest
 
-from llm.structured_output import parse_json_response
 from llm.response_models import TopicResponse
-from llm.structured_output import parse_structured_response
+from llm.structured_output import (
+    parse_json_response,
+    parse_structured_response
+)
 
 
 def test_parse_structured_response():
