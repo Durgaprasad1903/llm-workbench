@@ -3,17 +3,23 @@ import os
 from dotenv import load_dotenv
 from openai import OpenAI
 
-load_dotenv()
 
-client = OpenAI(
-    api_key=os.getenv("OPENAI_API_KEY")
-)
+class OpenAIClient:
+    def __init__(self, model: str = "gpt-6-luna"):
+        load_dotenv()
 
+        api_key = os.getenv("OPENAI_API_KEY")
 
-def generate(prompt: str) -> str:
-    response = client.responses.create(
-        model="gpt-6-luna",
-        input=prompt
-    )
+        if not api_key:
+            raise ValueError("OPENAI_API_KEY is not set")
 
-    return response.output_text
+        self.client = OpenAI(api_key=api_key)
+        self.model = model
+
+    def generate(self, prompt: str) -> str:
+        response = self.client.responses.create(
+            model=self.model,
+            input=prompt
+        )
+
+        return response.output_text
