@@ -1,10 +1,10 @@
 import os
-
+from llm.base_client import BaseLLMClient
 from dotenv import load_dotenv
 from google import genai
 
 
-class GeminiClient:
+class GeminiClient(BaseLLMClient):
     def __init__(self, model: str = "gemini-2.5-flash"):
         load_dotenv()
 

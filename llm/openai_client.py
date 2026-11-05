@@ -1,10 +1,10 @@
 import os
-
+from llm.base_client import BaseLLMClient
 from dotenv import load_dotenv
 from openai import OpenAI
 
 
-class OpenAIClient:
+class OpenAIClient(BaseLLMClient):
     def __init__(self, model: str = "gpt-6-luna"):
         load_dotenv()
 
